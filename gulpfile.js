@@ -10,7 +10,7 @@ import dartSass from 'sass';
 const sass = gulpSass(dartSass);
 import browsersSync from 'browser-sync';
 
-gulp.task("browsersync", async function() {
+gulp.task("browsersync", async function () {
    browsersSync.init({
       server: {
          baseDir: 'src/'
@@ -38,11 +38,11 @@ gulp.task("sass", async function () {
 });
 
 gulp.task("scripts", async function () {
-   return gulp.src("src / js / *. js") 
-      .pipe(concat('scripts.js')) 
-      .pipe(uglify()) 
-      .pipe(rename({ suffix: '.min' })) 
-      .pipe(gulp.dest("dist / js")) 
+   return gulp.src("src / js / *. js")
+      .pipe(concat('scripts.js'))
+      .pipe(uglify())
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(gulp.dest("dist / js"))
       .pipe(browsersSync.stream());
 });
 
