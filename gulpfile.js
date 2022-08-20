@@ -18,7 +18,6 @@ gulp.task("browsersync", async function() {
    });
 });
 
-
 gulp.task("html", async function () {
    return gulp.src("src/html/*.html")
       .pipe(gulp.dest("dist"));
