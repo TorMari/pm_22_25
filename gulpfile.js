@@ -38,12 +38,11 @@ gulp.task("sass", async function () {
 });
 
 gulp.task("scripts", async function () {
-   return gulp.src("src / js / *. js") //вихідна директорія файлів
-      .pipe(concat('scripts.js')) // конкатенація js-файлів в один
-      .pipe(uglify()) //стиснення коду
-      .pipe(rename({ suffix: '.min' })) //перейменування файлу з
-      //приставкою .min
-      .pipe(gulp.dest("dist / js")) // директорія продакшена
+   return gulp.src("src / js / *. js") 
+      .pipe(concat('scripts.js')) 
+      .pipe(uglify()) 
+      .pipe(rename({ suffix: '.min' })) 
+      .pipe(gulp.dest("dist / js")) 
       .pipe(browsersSync.stream());
 });
 
