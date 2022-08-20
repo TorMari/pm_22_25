@@ -18,9 +18,6 @@ gulp.task("browsersync", async function() {
    });
 });
 
-//gulp.task('textTask', async function () {
-// console.log('This is a text task');
-//});
 
 gulp.task("html", async function () {
    return gulp.src("src/html/*.html")
