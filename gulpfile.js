@@ -10,20 +10,20 @@ import dartSass from "sass";
 import browsersSync from "browser-sync";
 const sass = gulpSass(dartSass);
 
-gulp.task ("browsersync", async function () {
-   browsersSync.init ({
+gulp.task("browsersync", async function () {
+   browsersSync.init({
       server: {
          baseDir: 'src/'
       }
    });
 });
 
-gulp.task ("html", async function () {
-   return gulp.src("src/html/*.html" )
+gulp.task("html", async function () {
+   return gulp.src("src/html/*.html")
       .pipe(gulp.dest("dist"));
 });
 
-gulp.task ("sass", async function () {
+gulp.task("sass", async function () {
    return gulp.src("src/sass/*.sass")
       .pipe(concat('styles.sass'))
       .pipe(sass())
@@ -37,7 +37,7 @@ gulp.task ("sass", async function () {
       .pipe(browsersSync.stream());
 });
 
-gulp.task ("scripts", async function () {
+gulp.task("scripts", async function () {
    return gulp.src("src / js / *. js")
       .pipe(concat('scripts.js'))
       .pipe(uglify())
@@ -46,7 +46,7 @@ gulp.task ("scripts", async function () {
       .pipe(browsersSync.stream());
 });
 
-gulp.task ("imgs", async function () {
+gulp.task("imgs", async function () {
    return gulp.src("src/img/**/*")
       .pipe(imagemin({
          progressive: true,
@@ -57,7 +57,7 @@ gulp.task ("imgs", async function () {
 });
 
 
-gulp.task ("watch", async function () {
+gulp.task("watch", async function () {
    gulp.watch("src/html/**/*.html", gulp.parallel("html"));
    gulp.watch("src/js/**/*.js", gulp.parallel("scripts"));
    gulp.watch("src/sass/**/*.sass", gulp.parallel("sass"));
