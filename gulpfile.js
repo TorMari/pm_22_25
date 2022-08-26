@@ -13,36 +13,38 @@ const sass = gulpSass(dartSass);
 gulp.task("browsersync", async function () {
    browsersSync.init({
       server: {
-         baseDir: 'src/'
+         baseDir: "./"
       }
    });
 });
 
+
 gulp.task("html", async function () {
    return gulp.src("src/html/*.html")
-      .pipe(gulp.dest("dist"));
+      .pipe(gulp.dest("dist"))
+      .pipe(browsersSync.stream());
 });
 
 gulp.task("sass", async function () {
    return gulp.src("src/sass/*.sass")
-      .pipe(concat('styles.sass'))
+      .pipe(concat("styles.sass"))
       .pipe(sass())
       .pipe(autoprefixer({
          overrideBrowserslist: ['last 2 versions'],
          cascade: false
       }))
       .pipe(cssnano())
-      .pipe(rename({ suffix: '.min' }))
+      .pipe(rename({ suffix: ".min" }))
       .pipe(gulp.dest("dist/css"))
       .pipe(browsersSync.stream());
 });
 
 gulp.task("scripts", async function () {
-   return gulp.src("src / js / *. js")
-      .pipe(concat('scripts.js'))
+   return gulp.src("src/js/*.js")
+      .pipe(concat("scripts.js"))
       .pipe(uglify())
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(gulp.dest("dist / js"))
+      .pipe(rename({ suffix: ".min" }))
+      .pipe(gulp.dest("dist/js"))
       .pipe(browsersSync.stream());
 });
 
@@ -62,8 +64,9 @@ gulp.task("watch", async function () {
    gulp.watch("src/js/**/*.js", gulp.parallel("scripts"));
    gulp.watch("src/sass/**/*.sass", gulp.parallel("sass"));
    gulp.watch("src/img/**/*", gulp.parallel("imgs"));
-   gulp.watch(['src/html/*.html']).on('change', browsersSync.reload);
+   gulp.watch(["*.html"]).on('change', browsersSync.reload);
 });
 
-const dev = gulp.series("html", "sass", "scripts", "imgs", "browsersync", "watch");
+
+const dev = gulp.parallel("html", "sass", "scripts", "imgs", "browsersync", "watch");
 gulp.task("default", dev);
