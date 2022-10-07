@@ -1,72 +1,76 @@
-import gulp from "gulp";
-import imagemin from "gulp-imagemin";
-import gulpSass from "gulp-sass";
-import cssnano from "gulp-cssnano";
-import autoprefixer from "gulp-autoprefixer";
-import concat from "gulp-concat";
-import uglify from "gulp-uglify";
-import rename from "gulp-rename";
-import dartSass from "sass";
-import browsersSync from "browser-sync";
-const sass = gulpSass(dartSass);
+const {src, dest, watch, parallel} = require('gulp');
+const concat = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
+const cssnano = require('gulp-cssnano');
+const rename = require('gulp-rename');
+const imagemin = require('gulp-imagemin');
+const uglify = require('gulp-uglify');
+const sass = require('gulp-sass')(require('sass'));
+const browserSync = require('browser-sync').create();
+const fileinclude = require('gulp-file-include');
 
-gulp.task("browsersync", async function () {
-   browsersSync.init({
-      server: {
-         baseDir: "./"
-      }
-   });
-});
+function html () {
+   return src("src/*.html")
+   .pipe(fileinclude())
+   .pipe(dest("dist"));
+}
 
+function SASS() {
+   return src('src/sass/styles.scss')
+   .pipe(concat('styles.scss'))
+   .pipe(sass())
+   .pipe(dest('src/css'))
+   .pipe(autoprefixer({
+      overrideBrowserslist: ['last 2 versions'],
+      cascade: false
+   }))
+   .pipe(cssnano())
+   .pipe(rename({ suffix: ".min" }))
+   .pipe(dest("dist/css"))
+   .pipe(browserSync.stream());
+}
 
-gulp.task("html", async function () {
-   return gulp.src("src/html/*.html")
-      .pipe(gulp.dest("dist"))
-      .pipe(browsersSync.stream());
-});
-
-gulp.task("sass", async function () {
-   return gulp.src("src/sass/*.sass")
-      .pipe(concat("styles.sass"))
-      .pipe(sass())
-      .pipe(autoprefixer({
-         overrideBrowserslist: ['last 2 versions'],
-         cascade: false
-      }))
-      .pipe(cssnano())
-      .pipe(rename({ suffix: ".min" }))
-      .pipe(gulp.dest("dist/css"))
-      .pipe(browsersSync.stream());
-});
-
-gulp.task("scripts", async function () {
-   return gulp.src("src/js/*.js")
+function scripts() {
+   return src("src/js/*.js")
       .pipe(concat("scripts.js"))
       .pipe(uglify())
       .pipe(rename({ suffix: ".min" }))
-      .pipe(gulp.dest("dist/js"))
-      .pipe(browsersSync.stream());
-});
+      .pipe(dest("dist/js"))
+      .pipe(browserSync.stream());
+};
 
-gulp.task("imgs", async function () {
-   return gulp.src("src/img/**/*")
+function imgs() {
+   return src("src/img/**/*")
       .pipe(imagemin({
          progressive: true,
          svgoPlugins: [{ removeViewBox: false }],
          interlaced: true
       }))
-      .pipe(gulp.dest("dist/img"))
-});
+      .pipe(dest("dist/img"))
+      .pipe(browserSync.stream());
+};
 
+function browsersync() {
+   browserSync.init({
+      server: {
+         baseDir: 'dist/'
+      }
+   });
+}
 
-gulp.task("watch", async function () {
-   gulp.watch("src/html/**/*.html", gulp.parallel("html"));
-   gulp.watch("src/js/**/*.js", gulp.parallel("scripts"));
-   gulp.watch("src/sass/**/*.sass", gulp.parallel("sass"));
-   gulp.watch("src/img/**/*", gulp.parallel("imgs"));
-   gulp.watch(["*.html"]).on('change', browsersSync.reload);
-});
+function watcher() {
+   watch(['src/**/*.html'], html);
+   watch(['src/sass/**/*.scss'], SASS);
+   watch (['src/js/*.js'], scripts);
+   watch (['src/images/*.*'], imgs);
+   watch(['src/*.html']).on('change', browserSync.reload);
+}
 
+exports.html = html;
+exports.SASS = SASS;
+exports.scripts = scripts;
+exports.imgs = imgs;
+exports.watcher = watcher;
+exports.browsersync = browsersync;
 
-const dev = gulp.parallel("html", "sass", "scripts", "imgs", "browsersync", "watch");
-gulp.task("default", dev);
+exports.default = parallel(html, SASS, scripts, imgs, browsersync, watcher);

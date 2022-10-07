@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+
+.media-body {
+  img {
+    float: flex;
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+    margin: 60px auto;
+    background-color: #cbcbcb;
+    border: 2px solid #eaeaea;
+  }
+
+  .profession {
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 24px;
+    color: #777777;
+    font-weight: 400;
+    font-family: 'Open Sans';
+    margin: 51px auto;
+  }
+}
+
+#menuLink {
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  color: #222222;
+  font-weight: 500;
+  margin: -55px auto;
+}
+
+h1 {
+  position: absolute;
+  /*float: block;*/
+  margin: -1863px 23px;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 20px;
+  color: #222222;
+  font-weight: 600;
+  font-family: "Poppins";
+}
+
+.navigation {
+  padding: 0px;
+
+  #icon1 {
+    height: 15px;
+    margin-left: 25px;
+  }
+
+  #icon2 {
+    height: 12px;
+    margin-left: 25px;
+  }
+
+  span {
+    margin: 0px 15px;
+  }
+
+  #mes1 {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin: 3px 72px;
+  }
+
+}
+
+.components {
+  padding: 0px;
+
+  #icon3 {
+    height: 14px;
+    margin-left: 25px;
+    margin-top: -10px;
+  }
+
+  #icon4 {
+    height: 14px;
+    margin-left: 25px;
+    margin-top: -50px;
+  }
+
+  #icon5 {
+    height: 14px;
+    margin-left: 25px;
+    margin-top: -80px;
+  }
+
+  #icon6 {
+    height: 14px;
+    margin-left: 23px;
+    margin-top: -107px;
+  }
+
+  #icon7 {
+    height: 14px;
+    margin-left: 25px;
+    margin-top: -137px;
+  }
+
+  #icon8 {
+    height: 14px;
+    margin-left: 26px;
+    margin-top: -115px;
+  }
+
+  span {
+    position: absolute;
+  }
+
+  #mes2 {
+    width: 30px;
+    height: 30px;
+    /*position: fixed;*/
+    margin-left: 124px;
+  }
+}
+
+.stuff {
+  #icon9 {
+    height: 18px;
+    margin-left: 26px;
+    margin-top: -18px;
+  }
+
+  #icon10 {
+    height: 10px;
+    width: 9px;
+    margin-left: 30px;
+    margin-top: -48px;
+  }
+
+  #mes3 {
+    width: 40px;
+    margin-left: 164px;
+    margin-top: -58px;
+  }
+
+  .num:hover {
+    color: rgb(4, 69, 12);
+  }
+
+  .button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #aaa;
+    height: 21px;
+    width: 21px;
+    border-radius: 45px;
+    background-color:#ffffff;
+    margin-left: 24px;
+    margin-top: -18px;
+  }
+
+  .per {
+    margin: 22px 175px;
+    position: absolute;
+    color: #777777;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: "Open Sans";
+  }
+}
+
+p {
+  font-size: 12px;
+  letter-spacing: 0px;
+  line-height: 13px;
+  color: #222222;
+  font-weight: 660;
+  font-family: "Open Sans";
+}
+
+span {
+  font-size: 12px;
+  letter-spacing: 0px;
+  line-height: 30px;
+  color: #777777;
+  font-weight: 600;
+  font-family: "Open Sans";
+}
+
+span:hover {
+  color: #0a0909;
+}
+
+.num {
+  position: absolute;
+  color: #fafafa;
+  font-size: 9px;
+}
+
+.num:hover {
+  color: rgb(14, 9, 82);
+}
+
+
+
+#sidebarCollapse {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  background: #ffffff;
+  line-height: 44px;
+  text-align: center;
+  text-indent: -4px;
+  top: 25px;
+  right: 18px;
+  transition: all 0.5s ease;
+
+  img {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+
+#sidebarCollapse1 {
+  margin-top: -1270px;
+  height: 30px;
+  width: 30px;
+  background: #ffffff;
+  img {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+
+.vertical-nav {
+  min-width: 13.5rem;
+  width: 13.5rem;
+  height: 100%;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.vertical-nav .profile {
+  background: rgba(0, 0, 0, 0.05);
+  height: 230px;
+}
+
+
+.page-content {
+  width: calc(100% - 10rem);
+  margin-left: 10rem;
+  transition: all 0.4s;
+}
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 1160px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+
+  #content.active {
+    margin-left: 17rem;
+    width: calc(100% - 17rem);
+  }
+}
